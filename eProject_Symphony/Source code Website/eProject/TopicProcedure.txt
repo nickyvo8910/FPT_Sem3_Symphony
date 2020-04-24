@@ -1,0 +1,41 @@
+create procedure [dbo].[getAdminTopic]
+as
+begin
+select * from tblTopic
+end
+go
+create procedure UpdateAdminTopic
+@topicID varchar(50),
+@courseID varchar(50),
+@topicDes varchar(50),
+@topicName varchar(50)
+as
+begin
+update tblTopic set topicName=@topicName,courseID=@courseID,topicDes=@topicDes where topicID=@topicID
+end
+go
+create procedure AddAdminTopic
+@topicID varchar(50),
+@courseID varchar(50),
+@topicDes varchar(50),
+@topicName varchar(50)
+as
+begin
+insert into tblTopic(topicID,courseID,topicName,topicDes) values(@topicID,@courseID,@topicName,@topicDes)
+end
+go
+create procedure [dbo].[AddAdminClass]
+@ClassID varchar(50),
+@entranceID varchar(50),
+@startDate datetime
+
+as
+begin
+insert into tblClass(classID,entranceID,startDate) values(@ClassID,@entranceID,@startDate)
+end
+
+Create procedure [dbo].getAdminClass
+as
+begin
+select * from tblClass
+end

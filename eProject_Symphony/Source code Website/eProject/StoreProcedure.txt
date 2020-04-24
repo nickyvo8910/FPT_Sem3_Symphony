@@ -1,0 +1,41 @@
+Create procedure getAdminResult
+
+as
+begin
+select userID,userFullName,userDOB,userSex,entranceMark,practiceSession from tblUser ;
+end
+
+CREATE procedure getAdminUser
+
+as
+begin
+select userID,userFullName,userDOB,userEmail,userSex from tblUser ;
+end
+
+Create procedure getAdminFeedback
+
+as
+begin
+select faqID,faqQuestion,faqAnswer from tblFAQ ;
+end
+
+Create procedure getAdminCourse
+
+as
+begin
+select courseID,courseName,courseFee from tblCourse ;
+end
+
+Create procedure getAdminPayment
+
+as
+begin
+select * from tblPayment ;
+end
+
+Create procedure getAdminEntrances
+
+as
+begin
+select * from tblEntrance ;
+end

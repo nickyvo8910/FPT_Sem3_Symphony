@@ -1,0 +1,187 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<title>SymphonyLtd</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/cufon-yui.js"></script>
+<script type="text/javascript" src="js/arial.js"></script>
+<script type="text/javascript" src="js/cuf_run.js"></script>
+    <style type="text/css">
+        .auto-style1 {
+            height: 30px;
+        }
+        .auto-style2 {
+            height: 30px;
+            width: 70px;
+        }
+        .auto-style3 {
+            height: 30px;
+            width: 70px;
+        }
+        .auto-style4 {
+            height: 30px;
+            width: 69px;
+        }
+        .auto-style5 {
+            height: 30px;
+            width: 13px;
+        }
+        .auto-style6 {
+            height: 25px;
+        }
+    </style>
+    <script>
+        function SetTextInTextBox2() {
+            document.getElementById('txtSearchCourse').value = "";
+        }
+    </script>
+</head>
+<body>
+<form id="mainfrm" runat="server" method="post">
+<div class="main">
+  <div class="header">
+    <div class="logo">
+      <h1><a href="#"><span>Symphony</span>Limited<small>IT Academy</small></a></h1>
+    </div>
+    <div class="menu_nav">
+      <ul>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder2" runat="server"></asp:ContentPlaceHolder>
+      </ul>
+    </div>
+    <div class="clr"></div>
+    <div class="hbg"><img src="images/header_images.jpg" width="670" height="298" alt="" class="fl" />
+      <div class="info fl">
+        <h4>Symphony</h4>
+        <h3>limited</h3>
+      </div>
+      <div class="clr"></div>
+    </div>
+    <div class="clr"></div>
+  </div>
+  <div class="content">
+    <div class="mainbar">
+        <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
+        </asp:ToolkitScriptManager>
+        <br />
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    <div class="sidebar">
+      <div class="gadget">
+        <div class="search">
+          <form method="get" id="search" action="#">
+            <span>
+            <asp:TextBox ID="txtSearchCourse" runat="server" Text="Search Course...." onfocus="SetTextInTextBox2()" ></asp:TextBox>
+            <asp:ImageButton ID="imgbtnsearchCourse" runat="server" ImageUrl="~/images/search.gif" OnClick="imgbtnsearchCourse_Click" />
+            </span>
+          </form>
+          <!--/searchform -->
+          <div class="clr"></div>
+          </div>
+        </div>
+      <div class="gadget">
+           <h2 class="star"><span><asp:Label ID="lblLogin" runat="server" Text="Login "></asp:Label><asp:LinkButton ID="lnkbtnLogOut" runat="server" Visible="False" Font-Size="Small" OnClick="lnkbtnLogOut_Click" CausesValidation="False">Log Out</asp:LinkButton><asp:Label ID="lblError" runat="server" Text="   Invalid Login" ForeColor="Red" Visible="False"></asp:Label></span></h2>
+          <%if(Session["userID"] ==null){ %>
+          <asp:Panel runat="server" ID="panelLogin" Height="175px">           
+            <div class="login">
+                <table style="width: 100%; height: 90px;">
+                    <tr>
+                        <td class="auto-style2" style="color:#97c950;font-weight:bold">Username</td>
+                        <td class="auto-style1" colspan="2">
+                            <asp:TextBox ID="txtloginID" runat="server" Width="130px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style2" style="color:#97c950;font-weight:bold">Password</td>
+                        <td class="auto-style1" colspan="2">
+                            <asp:TextBox ID="txtloginPass" runat="server" Width="130px" TextMode="Password"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr><td colspan="3" class="auto-style6" style="text-align:center">Not registered ? <asp:HyperLink ID="linkReg" runat="server" NavigateUrl="~/regUser.aspx">Register now !!!</asp:HyperLink></td></tr>
+                    <tr>
+                        <td class="auto-style3"></td>
+                        <td class="auto-style5">
+                            <asp:Button ID="btnSubmitLogin" runat="server" Text="Submit" Width="60px" Height="30px" OnClick="btnSubmitLogin_Click1" CausesValidation="False"/></td>
+                        <td class="auto-style4">
+                            <asp:Button ID="btnResetLogin" runat="server" Text="Reset" Width="60px" Height="30px" CausesValidation="False" />
+                        </td>
+                    </tr>
+                </table>
+            </div>     
+          </asp:Panel>
+          <!--/Loginform -->
+          <%} %>
+      </div>
+      <div class="gadget">
+        <%if(Session["userID"] !=null && Session["userID"].ToString() !="admin"){ %>
+          <asp:Panel runat="server" ID="panelUser"> 
+        <h2 class="star"><span>User Features</span></h2>
+        <div class="clr"></div>
+        <ul class="sb_menu">
+            <li class="active"><asp:LinkButton ID="lnkuserResult" runat="server" OnClick="lnkuserResult_Click" CausesValidation="false">My Result</asp:LinkButton></li>
+            <li class="active"><asp:LinkButton ID="lnkuserClass" runat="server" OnClick="lnkuserClass_Click" CausesValidation="false">My Class</asp:LinkButton></li>
+            <li class="active"><asp:LinkButton ID="lnkuserPayment" runat="server" OnClick="lnkuserPayment_Click" CausesValidation="false">My Payment</asp:LinkButton></li>
+            <li class="active"><asp:LinkButton ID="lnkuserRegExam" runat="server" OnClick="lnkuserRegExam_Click" CausesValidation="false">Register Exam</asp:LinkButton></li>
+            <li class="active"><asp:LinkButton ID="lnkuserPactical" runat="server" OnClick="lnkuserPactical_Click" CausesValidation="false">Practical Session</asp:LinkButton></li>
+        </ul>
+        </asp:Panel><%
+                    } %>
+      </div>
+      <div class="gadget">
+          <%if(Session["userID"] !=null && Session["userID"].ToString() =="admin"){ %>
+        <asp:Panel runat="server" ID="panelAdmin"> 
+        <h2 class="star"><span>Admin Features</span></h2>
+        <div class="clr"></div>
+        <ul class="ex_menu">
+          <li><a href="admin_Course.aspx">Manage Courses</a></li>
+          <li><a href="admin_Topic.aspx">Manage Topic</a></li>
+          <li><a href="admin_Entrances.aspx">Manage Entrances</a></li>
+          <li><a href="admin_Class.aspx">Manage Class</a></li>
+          <li><a href="admin_Result.aspx">Manage Result</a></li>
+          <li><a href="admin_Payment.aspx">Manage Payment</a></li>
+          <li><a href="admin_Feedback.aspx">Manage Feedback</a></li>
+          <li><a href="admin_User.aspx">Manage User</a></li>
+        </ul>
+        </asp:Panel>
+          <%} %>
+      </div>
+      </div>
+      <div class="clr"></div>
+      </div>
+  <div class="fbg">
+    <div class="fbg_resize">
+      <div class="col c1">
+        <h2><span>Image Gallery<h2>
+        <a href="#"><img src="images/pic_1.jpg" width="58" height="58" alt="" /></a> <a href="#"><img src="images/pic_2.jpg" width="58" height="58" alt="" /></a> <a href="#"><img src="images/pic_3.jpg" width="58" height="58" alt="" /></a> <a href="#"><img src="images/pic_4.jpg" width="58" height="58" alt="" /></a> <a href="#"><img src="images/pic_5.jpg" width="58" height="58" alt="" /></a> <a href="#"><img src="images/pic_6.jpg" width="58" height="58" alt="" /></a> </div>
+      <div class="col c2">
+        <h2><span>über</span></h2>
+        <p>Symphony liefert IT-Lösungen für die Staatsanleihen, Unternehmensanleihen und privaten Sektor mit ICT Beratung, Schulung, Bildung, Business Solutions, Infrastructure, (Hardware, Software & Netzwerk, USV-Anlagen etc.) und Maintenance Services.<br /> <a href="#">Erfahren Sie mehr ...</a></p>
+      </div>
+      <div class="col c3">
+        <h2><span>About</span></h2>
+       <p>Symphony delivers IT solutions to the government, corporate and  private sectors with ICT Consultancy, Training, Education, Business Solutions, Infrastructure, (hardware, software & Networking, UPSs etc), and Maintenance Services.<br /> <a href="#">Learn more...</a></p>
+           </div>
+        </div>
+        <div class="clr"></div>
+      </div>
+      
+  </div>
+  <div class="footer">
+    <div class="footer_resize">
+      <p class="lf">&copy; Copyright <a href="#">Symphony Limited</a>.</p>
+      <p class="rf">Layout by Rocket <a href="http://www.rocketwebsitetemplates.com/">Website Templates</a></p>
+      <div class="clr"></div>
+    </div>
+  </div>
+<div align="center">Copyright © 2013 Symphony Limited. All rights reserved. <a href='#'>Terms of Use &nbsp; Privacy Policy</a></div>
+</form>
+</body>
+</html>
